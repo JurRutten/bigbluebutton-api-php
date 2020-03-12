@@ -878,9 +878,9 @@ class CreateMeetingParameters extends MetaParameters
     {
         $result = '';
 
+        $xml    = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><modules/>');
+        $module = $xml->addChild('module');
         if (!empty($this->presentations)) {
-            $xml    = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><modules/>');
-            $module = $xml->addChild('module');
             $module->addAttribute('name', 'presentation');
 
             foreach ($this->presentations as $nameOrUrl => $content) {
@@ -896,8 +896,8 @@ class CreateMeetingParameters extends MetaParameters
                     $document[0] = $content;
                 }
             }
-            $result = $xml->asXML();
         }
+        $result = $xml->asXML();
 
         return $result;
     }
